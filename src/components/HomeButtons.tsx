@@ -26,23 +26,23 @@ function EmptyButtons(props: { onCreate: () => void; onOpen: () => void }) {
 
 function FilledButtons(props: { onCreate: () => void; onOpen: () => void; onShare: () => void }) {
   return (
-    <div class="flex items-center justify-end h-13 bg-black">
-      <div class="flex flex-row gap-3 w-full px-4">
+    <div class="flex items-center justify-end bg-black py-3">
+      <div class="flex flex-col sm:flex-row gap-3 w-full px-4">
         <button
           onClick={props.onShare}
-          class="w-full cursor-pointer px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 max-w-50 mr-auto"
+          class="w-full cursor-pointer px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 sm:max-w-50 sm:mr-auto"
         >
           Udostępnij listę
         </button>
         <button
           onClick={props.onCreate}
-          class="w-full cursor-pointer px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 max-w-50"
+          class="w-full cursor-pointer px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 sm:max-w-50"
         >
           Utwórz nową listę
         </button>
         <button
           onClick={props.onOpen}
-          class="w-full cursor-pointer px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 max-w-80"
+          class="w-full cursor-pointer px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 sm:max-w-80"
         >
           Otwórz inną istniejącą listę
         </button>

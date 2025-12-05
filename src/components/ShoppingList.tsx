@@ -88,8 +88,8 @@ export default function ShoppingList(props: {
   return (
     <Show when={props.shoppingList()}>
       {list => (
-        <div class="mb-auto mt-auto">
-          <div class="max-w-md mx-auto mt-8 bg-white shadow-md rounded-2xl p-6">
+        <div class="flex-1 flex items-center justify-center bg-black px-4 py-8">
+          <div class="max-w-md w-full bg-white shadow-md rounded-2xl p-6">
             <div class="flex items-center gap-2 mb-4 min-h-[40px]">
               <Show
                 when={isEditing()}

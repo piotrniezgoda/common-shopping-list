@@ -79,6 +79,14 @@ export default function Home() {
             if (qrId !== localStorage.getItem("shoppingListShareId")) {
               localStorage.setItem("shoppingListShareId", qrId);
             }
+            // Dodaj do ostatnio otwartych list
+            const lastUsedIds = localStorage.getItem("shoppingListLastUsedIds");
+            const parsedLastUsedIds = lastUsedIds ? JSON.parse(lastUsedIds) : [];
+            const existingList = parsedLastUsedIds.find((list: any) => list.shareId === qrId);
+            if (!existingList) {
+              parsedLastUsedIds.push({ shareId: qrId, name: data.name });
+              localStorage.setItem("shoppingListLastUsedIds", JSON.stringify(parsedLastUsedIds));
+            }
           }
         })
         .finally(() => {
@@ -297,7 +305,7 @@ export default function Home() {
   };
 
   return (
-    <main class="h-1 min-h-screen text-center mx-auto text-gray-700 p-4 flex flex-col">
+    <main class="min-h-screen text-center mx-auto text-gray-700 flex flex-col bg-black">
       <Show when={isMounted() && !shouldShowLoader()} fallback={<Loader />}>
         <Show when={!listNotFoundError()} fallback={
           <div class="flex min-h-screen justify-center items-center">
