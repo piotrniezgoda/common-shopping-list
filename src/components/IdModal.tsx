@@ -38,7 +38,8 @@ createEffect(() => {
   const handleModalSubmit = async (id?: string) => {
     setInProgress(true);
     setIdError(null);
-    await fetch(`${API_LISTS}/${id || inputValue()}`, { method: "GET" })
+    const listId = id || inputValue();
+    await fetch(`${API_LISTS}/${listId}`, { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
@@ -57,6 +58,16 @@ createEffect(() => {
           props.setIsOpenIdModal(false);
         } else {
           setIdError("Nie znaleziono listy o podanym ID. Sprawdź pisownię lub wybierz inną.");
+          // Jeśli był to wybór z historii (parametr id), usuń go z localStorage
+          if (id) {
+            const lastUsedIds = localStorage.getItem("shoppingListLastUsedIds");
+            if (lastUsedIds) {
+              const parsedLastUsedIds = JSON.parse(lastUsedIds);
+              const filteredIds = parsedLastUsedIds.filter((list: any) => list.shareId !== id);
+              localStorage.setItem("shoppingListLastUsedIds", JSON.stringify(filteredIds));
+              setLastUsedIds(filteredIds);
+            }
+          }
         }
       })
       .catch((error) => {

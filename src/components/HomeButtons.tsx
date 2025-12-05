@@ -4,7 +4,7 @@ import type { ShoppingList } from "~/models/ShoppingList";
 
 function EmptyButtons(props: { onCreate: () => void; onOpen: () => void }) {
   return (
-    <div class="flex items-center justify-center h-full bg-black">
+    <div class="flex-1 flex items-center justify-center bg-black">
       <div class="flex flex-col gap-3 w-[200px] sm:w-[240px] md:w-[280px]">
         <button
           onClick={props.onCreate}

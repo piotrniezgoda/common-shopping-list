@@ -89,7 +89,24 @@ export default function ShoppingList(props: {
     <Show when={props.shoppingList()}>
       {list => (
         <div class="flex-1 flex items-center justify-center bg-black px-4 py-8">
-          <div class="max-w-md w-full bg-white shadow-md rounded-2xl p-6">
+          <div class="max-w-md w-full bg-white shadow-md rounded-2xl p-6 relative">
+            {/* Przycisk usuwania listy - zawsze w prawym górnym rogu */}
+            <Show when={isEditing()}>
+              <button
+                onClick={() => props.onDeleteList && props.onDeleteList()}
+                class="absolute -top-2 -right-2 cursor-pointer p-2 rounded-full bg-red-500 hover:bg-red-600 flex items-center justify-center z-10 shadow-lg"
+                aria-label="Usuń tę listę zakupów"
+                title="Usuń tę listę zakupów"
+                type="button"
+              >
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" width="20" height="20">
+                  <path d="M20.5001 6H3.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M18.8332 8.5L18.3732 15.3991C18.1962 18.054 18.1077 19.3815 17.2427 20.1907C16.3777 21 15.0473 21 12.3865 21H11.6132C8.95235 21 7.62195 21 6.75694 20.1907C5.89194 19.3815 5.80344 18.054 5.62644 15.3991L5.1665 8.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M6.5 6C6.55588 6 6.58382 6 6.60915 5.99936C7.43259 5.97849 8.15902 5.45491 8.43922 4.68032C8.44784 4.65649 8.45667 4.62999 8.47434 4.57697L8.57143 4.28571C8.65431 4.03708 8.69575 3.91276 8.75071 3.8072C8.97001 3.38607 9.37574 3.09364 9.84461 3.01877C9.96213 3 10.0932 3 10.3553 3H13.6447C13.9068 3 14.0379 3 14.1554 3.01877C14.6243 3.09364 15.03 3.38607 15.2493 3.8072C15.3043 3.91276 15.3457 4.03708 15.4286 4.28571L15.5257 4.57697C15.5433 4.62992 15.5522 4.65651 15.5608 4.68032C15.841 5.45491 16.5674 5.97849 17.3909 5.99936C17.4162 6 17.4441 6 17.5 6" stroke="#ffffff" stroke-width="1.5"></path>
+                </svg>
+              </button>
+            </Show>
+
             <div class="flex items-center gap-2 mb-4 min-h-[40px]">
               <Show
                 when={isEditing()}
@@ -116,39 +133,25 @@ export default function ShoppingList(props: {
                   </div>
                 }
               >
-                <div class="flex items-center gap-2 animate-fadeIn relative w-full">
+                <div class="flex items-center gap-2 animate-fadeIn w-full pr-10">
                   <input
                     ref={inputRef}
                     type="text"
                     value={newName()}
                     onInput={(e) => setNewName(e.currentTarget.value)}
-                    class="border rounded-lg px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="border rounded-lg px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 flex-1"
                   />
                   <button
                     onClick={onSave}
-                    class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg cursor-pointer hover:bg-blue-600"
+                    class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg cursor-pointer hover:bg-blue-600 whitespace-nowrap"
                   >
                     Zapisz
                   </button>
                   <button
                     onClick={() => setIsEditing(false)}
-                    class="text-gray-500 cursor-pointer text-sm hover:text-gray-700"
+                    class="text-gray-500 cursor-pointer text-sm hover:text-gray-700 whitespace-nowrap"
                   >
                     Anuluj
-                  </button>
-                  {/* Usuwanie listy pozycjonowane absolutnie w prawym górnym rogu */}
-                  <button
-                    onClick={() => props.onDeleteList && props.onDeleteList()}
-                    class="absolute right-2 cursor-pointer p-1 rounded-full bg-red-500 hover:bg-red-600 flex items-center justify-center"
-                    aria-label="Usuń tę listę zakupów"
-                    title="Usuń tę listę zakupów"
-                    type="button"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" width="22" height="22">
-                      <path d="M20.5001 6H3.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path>
-                      <path d="M18.8332 8.5L18.3732 15.3991C18.1962 18.054 18.1077 19.3815 17.2427 20.1907C16.3777 21 15.0473 21 12.3865 21H11.6132C8.95235 21 7.62195 21 6.75694 20.1907C5.89194 19.3815 5.80344 18.054 5.62644 15.3991L5.1665 8.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path>
-                      <path d="M6.5 6C6.55588 6 6.58382 6 6.60915 5.99936C7.43259 5.97849 8.15902 5.45491 8.43922 4.68032C8.44784 4.65649 8.45667 4.62999 8.47434 4.57697L8.57143 4.28571C8.65431 4.03708 8.69575 3.91276 8.75071 3.8072C8.97001 3.38607 9.37574 3.09364 9.84461 3.01877C9.96213 3 10.0932 3 10.3553 3H13.6447C13.9068 3 14.0379 3 14.1554 3.01877C14.6243 3.09364 15.03 3.38607 15.2493 3.8072C15.3043 3.91276 15.3457 4.03708 15.4286 4.28571L15.5257 4.57697C15.5433 4.62992 15.5522 4.65651 15.5608 4.68032C15.841 5.45491 16.5674 5.97849 17.3909 5.99936C17.4162 6 17.4441 6 17.5 6" stroke="#ffffff" stroke-width="1.5"></path>
-                    </svg>
                   </button>
                 </div>
               </Show>
@@ -195,11 +198,11 @@ export default function ShoppingList(props: {
               <ul class="h-max-full overflow-y-auto max-h-[400px]">
                 <For each={list().items.slice().sort((a, b) => a.order - b.order)}>
                   {item => (
-                    <li class="flex items-center justify-between py-2 border-b last:border-none">
+                    <li class="flex items-start justify-between py-2 border-b last:border-none gap-3">
                       {/* Checkbox i nazwa */}
-                      <div class="flex items-center cursor-pointer group" onClick={() => props.onToggle?.(item.id)}>
+                      <div class="flex items-start cursor-pointer group flex-1 min-w-0" onClick={() => props.onToggle?.(item.id)}>
                         <div
-                          class={`w-6 h-6 flex items-center justify-center rounded-full border-2 transition-colors ${
+                          class={`w-6 h-6 flex-shrink-0 flex items-center justify-center rounded-full border-2 transition-colors mt-0.5 ${
                             item.checked
                               ? "bg-green-500 border-green-500"
                               : "border-gray-400 group-hover:border-green-400"
@@ -218,7 +221,7 @@ export default function ShoppingList(props: {
                           )}
                         </div>
                         <span
-                          class={`ml-3 text-lg transition ${
+                          class={`ml-3 text-lg text-left transition break-words ${
                             item.checked
                               ? "line-through text-gray-400"
                               : "text-gray-800"
@@ -229,7 +232,7 @@ export default function ShoppingList(props: {
                       </div>
 
                       {/* Quantity i kosz */}
-                      <div class="flex items-center gap-2">
+                      <div class="flex items-center gap-2 flex-shrink-0">
                         <button
                           onClick={() => handleQuantityChange(item.id, Math.max(1, item.quantity - 1))}
                           class="w-6 h-6 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition cursor-pointer"
