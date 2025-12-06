@@ -4,9 +4,6 @@ import { Transition } from "solid-transition-group";
 import { ShoppingList } from "~/models/ShoppingList";
 import { QRCodeSVG, ErrorCorrectionLevel } from "solid-qr-code";
 
-import copyIcon from "/assets/icons/copy.svg";
-import doneIcon from "/assets/icons/done.svg";
-
 export default function IdModal(props: { isShareModalOpen: boolean, setIsShareModalOpen: (isOpen: boolean) => void, shoppingList: ShoppingList }) {
   const isOpen = () => props.isShareModalOpen;  
   const [isCopied, setIsCopied] = createSignal(false);
@@ -56,7 +53,7 @@ export default function IdModal(props: { isShareModalOpen: boolean, setIsShareMo
                   aria-label="Kopiuj kod"
                 >
                   <img 
-                    src={isCopied() ? doneIcon : copyIcon} 
+                    src={isCopied() ? "/assets/icons/done.svg" : "/assets/icons/copy.svg"} 
                     alt={isCopied() ? "Skopiowano" : "Kopiuj"} 
                     class="w-5 h-5"
                   />
