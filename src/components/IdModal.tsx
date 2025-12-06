@@ -97,13 +97,14 @@ createEffect(() => {
             <div class="bg-white rounded-2xl shadow-xl w-96 p-6 relative">
               {/* Ikonka zamknięcia */}
               <button
-                class="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+                class="absolute top-3 cursor-pointer right-3 text-gray-500 hover:text-gray-700"
                 onClick={() => props.setIsOpenIdModal(false)}
               >
                 ✕
               </button>
 
-              <h2 class="text-xl font-semibold mb-4">Podaj ID</h2>
+              <h2 class="text-xl font-semibold">Podaj Kod listy</h2>
+              <p class="text-sm font-light mb-4">Wpisz kod listy, aby ją otworzyć lub edytować.</p>
               <input
                 type="text"
                 value={inputValue()}
@@ -112,7 +113,7 @@ createEffect(() => {
                   setIdError(null);
                 }}
                 onFocus={() => setIdError(null)}
-                placeholder="Wpisz ID..."
+                placeholder="Wpisz kod..."
                 class="w-full px-3 py-2 border rounded-xl mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
               <Show when={!!idError()}>
@@ -122,7 +123,7 @@ createEffect(() => {
               <button
                 disabled={inProgress()}
                 onClick={() => handleModalSubmit()}
-                class={`w-full py-2 rounded-xl text-white transition 
+                class={`w-full py-2 rounded-xl text-white transition cursor-pointer
                 ${inProgress() ? "bg-blue-400 animate-pulse cursor-wait" : "bg-blue-600 hover:bg-blue-700"}`}
               >
                 {inProgress() ? "Ładowanie..." : "Zatwierdź"}

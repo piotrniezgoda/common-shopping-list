@@ -27,24 +27,24 @@ function EmptyButtons(props: { onCreate: () => void; onOpen: () => void }) {
 function FilledButtons(props: { onCreate: () => void; onOpen: () => void; onShare: () => void }) {
   return (
     <div class="flex items-center justify-end bg-black py-3">
-      <div class="flex flex-col sm:flex-row gap-3 w-full px-4">
+      <div class="flex flex-row gap-3 w-full px-4">
         <button
           onClick={props.onShare}
-          class="w-full cursor-pointer px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 sm:max-w-50 sm:mr-auto"
+          class="w-13 h-13 flex rounded-full justify-center items-center cursor-pointer px-2 py-2 bg-emerald-500 text-white hover:bg-emerald-600"
         >
-          Udostępnij listę
+          <img src="/assets/icons/share.svg" alt="Udostępnij" class="inline-block w-4.5 h-4.5" />
         </button>
         <button
           onClick={props.onCreate}
-          class="w-full cursor-pointer px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 sm:max-w-50"
+          class="w-13 h-13 flex ml-auto rounded-full justify-center items-center cursor-pointer px-2 py-2 bg-emerald-500 text-white hover:bg-emerald-600"
         >
-          Utwórz nową listę
+          <img src="/assets/icons/create.svg" alt="Nowa lista" class="inline-block w-4.5 h-4.5" />
         </button>
         <button
           onClick={props.onOpen}
-          class="w-full cursor-pointer px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 sm:max-w-80"
+          class="w-13 h-13 flex rounded-full justify-center items-center cursor-pointer px-2 py-2 bg-blue-500 text-white hover:bg-blue-600"
         >
-          Otwórz inną istniejącą listę
+          <img src="/assets/icons/open.svg" alt="Otwórz" class="inline-block w-4.5 h-4.5" />
         </button>
       </div>
     </div>

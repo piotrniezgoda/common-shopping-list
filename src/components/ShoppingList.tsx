@@ -168,10 +168,11 @@ export default function ShoppingList(props: {
                 class="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-emerald-300"
               />
               <button
+                disabled={!newItemName().trim()}
                 onClick={handleAddItem}
-                class="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition"
+                class="px-2 py-2 w-10 h-10 rounded-full bg-emerald-500 cursor-pointer justify-center items-center flex text-white hover:bg-emerald-600 transition disabled:opacity-20 disabled:hover:bg-emerald-500"
               >
-                Dodaj
+                <img src="/assets/icons/plus.svg" alt="Dodaj" class="inline-block w-full h-full" />
               </button>
             </div>
 
